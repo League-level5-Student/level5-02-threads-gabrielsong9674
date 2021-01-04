@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import thread_pool.ThreadPool;
+
 //   A Thread Pool is a way of managing multiple threads with multiple workloads.
 //   It works by collecting a list of tasks to be performed by a thread.
 //   A pool of threads is then created, and each thread takes a task from the list and does that work.
@@ -33,6 +33,7 @@ public class ThreadPoolTest {
 		
 		for(int i = 0; i < count; i++){
 			int x = i * count;
+			//lambda defines the perform method
 			tp.addTask(()->{
 				for(int j = 0; j < count; j++){
 					chars[x + j] = Character.toUpperCase(chars[x + j]);
@@ -42,7 +43,12 @@ public class ThreadPoolTest {
 
 		long start = System.currentTimeMillis();
 		
-		tp.start();
+		try {
+			tp.start();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		long end = System.currentTimeMillis() - start;
 		System.out.println("Total time: " + end);
